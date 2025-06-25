@@ -1,0 +1,45 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependency directories
+node_modules/
+
+# Vite build output
+dist/
+dist-ssr/
+
+# Local env files
+.env
+.env.*.local
+*.local
+
+# Vite cache (opt-in by default in Vite 5+)
+.vite/
+
+# Editor settings
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+
+# macOS file
+.AppleDouble
+.LSOverride
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Others
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
