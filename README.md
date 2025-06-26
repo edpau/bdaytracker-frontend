@@ -67,6 +67,15 @@ If you change `.env`, restart the dev server (`npm run dev`) for changes to take
 
 ---
 
+## 📒 Developer Notes
+
+Personal learning logs documenting key decisions, setup patterns, and dev research.
+
+- [01 – Frontend Setup & Fetching](./docs/learning-log/01-frontend-setup-and-fetching.md)
+- Coming soon: Testing log, dark mode design log, backend integration notes
+
+---
+
 ## 🚦Next Steps (WIP)
 
 - [x] Add environment variable support via `.env`
