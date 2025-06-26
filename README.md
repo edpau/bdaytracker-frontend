@@ -1,4 +1,15 @@
-## 🛠️ Project Setup
+# 🎂 BdayTracker Frontend
+
+A birthday calendar web app for internal company use.  
+Built with Vite + React + Tailwind. Connects to a Spring Boot backend to display today’s and upcoming birthdays.
+
+## 🛠️ Project Stack
+
+![Vite](https://img.shields.io/badge/Vite-6.3.5-blueviolet)
+![TypeScript](https://img.shields.io/badge/TypeScript-React-blue)
+![Prettier](https://img.shields.io/badge/Prettier-enabled-lightgrey)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-Enabled-38bdf8)
+![Husky](https://img.shields.io/badge/Pre--commit-Husky-cc0000)
 
 This project uses:
 
@@ -7,6 +18,9 @@ This project uses:
 - [Prettier](https://prettier.io/) with `prettier-plugin-tailwindcss`
 - [ESLint](https://eslint.org/) for linting
 - [Husky](https://typicode.github.io/husky) + [lint-staged](https://github.com/okonet/lint-staged) for **pre-commit formatting and lint checks**
+
+📄 **Full developer setup:**  
+👉 [`docs/dev-setup.md`](./docs/dev-setup.md)
 
 ---
 
@@ -33,92 +47,29 @@ npm run lint      # Manually run ESLint
 
 ---
 
-## 🎨 Tailwind Setup (Plugin Method)
+## ⚙️ Environment Variables
 
-Tailwind is integrated using the plugin-based method:
+Create a `.env` file in the project root. Here's the recommended setup:
 
-- Installed:
+```env
+# Base API URL for local backend
+VITE_API_BASE_URL=http://localhost:8080/api
 
-  ```bash
-  npm install tailwindcss @tailwindcss/vite
-  ```
-
-- Configured in `vite.config.ts`:
-
-  ```ts
-  import tailwindcss from '@tailwindcss/vite';
-  plugins: [react(), tailwindcss()];
-  ```
-
-- CSS entry (`src/index.css`):
-
-  ```css
-  @import 'tailwindcss';
-
-  * {
-    @apply transition-colors duration-300;
-  }
-  ```
-
----
-
-## 🧹 Code Style: Prettier + Tailwind Plugin
-
-- Installed:
-
-  ```bash
-  npm install -D prettier prettier-plugin-tailwindcss
-  ```
-
-- `.prettierrc` includes:
-
-  ```json
-  {
-    "singleQuote": true,
-    "semi": true,
-    "plugins": ["prettier-plugin-tailwindcss"]
-  }
-  ```
-
----
-
-## 🛡 Husky + lint-staged Pre-commit Hook
-
-To ensure code is always linted and formatted before committing:
-
-### Installed:
-
-```bash
-npm install -D husky lint-staged
-npm run prepare
-npx husky add .husky/pre-commit "npx lint-staged"
+# Toggle between using mock data or backend
+VITE_USE_MOCK=true
 ```
 
-### `.husky/pre-commit`
+📄 See `.env.example` for a template you can copy.
 
-```sh
-#!/bin/sh
-npx lint-staged
-```
+### 🔁 Don’t forget:
 
-> ⚠️ Legacy `husky.sh` line removed — ready for Husky v10.
-
----
-
-### `package.json` → lint-staged config:
-
-```json
-"lint-staged": {
-  "*.{ts,tsx}": ["eslint --fix"],
-  "*.{js,jsx,ts,tsx,json,css,md}": ["prettier --write"]
-}
-```
+If you change `.env`, restart the dev server (`npm run dev`) for changes to take effect.
 
 ---
 
 ## 🚦Next Steps (WIP)
 
-- [ ] Add environment variable support via `.env`
+- [x] Add environment variable support via `.env`
 - [ ] Add font and theme token support for light/dark mode
 - [ ] Add CI check with ESLint + Prettier
 - [ ] Connect to backend API (Spring Boot)
