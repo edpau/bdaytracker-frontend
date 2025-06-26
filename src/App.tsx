@@ -1,6 +1,16 @@
-import { useEffect } from 'react';
+import React from 'react';
+import { useEffect, useState } from 'react';
+
+interface Staff {
+  id: number;
+  firstName: string;
+  lastName: string;
+  birthday: string;
+}
 
 function App() {
+  const [staffList, setStaffList] = useState<Staff[]>([]);
+
   useEffect(() => {
     // TODO: move fetch logic into api.ts and add loading/error states
     const useMock = import.meta.env.VITE_USE_MOCK === 'true';
@@ -11,8 +21,12 @@ function App() {
     const fetchData = async () => {
       try {
         const response = await fetch(url);
-        const json = await response.json();
+        const json: Staff[] = await response.json();
         console.log(json);
+        if (!Array.isArray(json)) {
+          throw new Error('API did not return an array');
+        }
+        setStaffList(json);
       } catch (error) {
         console.error('Fetch error:', error);
         alert('landing error');
@@ -25,8 +39,15 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-100 p-8 text-center">
       <h1 className="text-3xl font-bold text-blue-600 underline">
-        Hello Tailwind!
+        Staff Birthday
       </h1>
+      {staffList.map((staff) => (
+        <React.Fragment key={staff.id}>
+          <p>{staff.firstName}</p>
+          <p>{staff.lastName}</p>
+          <p>{staff.birthday}</p>
+        </React.Fragment>
+      ))}
     </div>
   );
 }
