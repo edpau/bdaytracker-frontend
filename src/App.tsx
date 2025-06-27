@@ -53,11 +53,11 @@ function App() {
       staffByDay[currentDateIndex].length === 0 ? (
         <p>No one has birthday</p>
       ) : (
-        staffByDay[currentDateIndex]?.map((staff) => (
-          <ul key={staff.id}>
-            <li>{`${staff.firstName} ${staff.lastName}`}</li>
-          </ul>
-        ))
+        <ul>
+          {staffByDay[currentDateIndex]?.map((staff) => (
+            <li key={staff.id}>{`${staff.firstName} ${staff.lastName}`}</li>
+          ))}
+        </ul>
       )}
       <div className="mt-20">
         {staffByDay.map((_, index) => (
