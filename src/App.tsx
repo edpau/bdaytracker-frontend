@@ -1,4 +1,3 @@
-import React from 'react';
 import { useEffect, useState } from 'react';
 
 interface Staff {
@@ -11,30 +10,29 @@ function App() {
   const [staffByDay, setStaffByDay] = useState<Staff[][]>([]);
   const [currentDateIndex, setCurrentDateIndex] = useState<number>(0);
 
-  useEffect(() => {
-    // TODO: move fetch logic into api.ts and add loading/error states
+  // TODO: move fetch logic into api.ts and add loading/error states
+  const fetchData = async () => {
     const useMock = import.meta.env.VITE_USE_MOCK === 'true';
     const baseURL = import.meta.env.VITE_API_BASE_URL;
-
     const url = useMock
       ? '/mock/staff/mock-staff-per-day.json'
       : `${baseURL}/v1/staff`;
 
-    const fetchData = async () => {
-      try {
-        const response = await fetch(url);
-        const json: Staff[][] = await response.json();
-        console.log(json);
-        if (!Array.isArray(json)) {
-          throw new Error('API did not return an array');
-        }
-        setStaffByDay(json);
-      } catch (error) {
-        console.error('Fetch error:', error);
-        alert('landing error');
+    try {
+      const response = await fetch(url);
+      const json: Staff[][] = await response.json();
+      console.log(json);
+      if (!Array.isArray(json)) {
+        throw new Error('API did not return an array');
       }
-    };
+      setStaffByDay(json);
+    } catch (error) {
+      console.error('Fetch error:', error);
+      alert('landing error');
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, []);
 
