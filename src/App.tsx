@@ -36,6 +36,18 @@ function App() {
     fetchData();
   }, []);
 
+  const dayIndexToMonthDayMap = (() => {
+    const result = [];
+    const daysInMonth = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    for (let month = 0; month < daysInMonth.length; month++) {
+      for (let day = 1; day <= daysInMonth[month]; day++) {
+        result.push({ month: month + 1, day });
+      }
+    }
+    console.log(result);
+    return result;
+  })();
+
   const handleSelectDate = (dateIndex: number) => {
     setCurrentDateIndex(dateIndex);
     console.log(dateIndex);
@@ -47,29 +59,41 @@ function App() {
         Staff Birthday
       </h1>
 
-      <h2>{currentDateIndex} birthday star are </h2>
+      <div className="border">
+        <h2>
+          {dayIndexToMonthDayMap[currentDateIndex].month}/
+          {dayIndexToMonthDayMap[currentDateIndex].day}
+        </h2>
 
-      {!Array.isArray(staffByDay[currentDateIndex]) ||
-      staffByDay[currentDateIndex].length === 0 ? (
-        <p>No one has birthday</p>
-      ) : (
-        <ul>
-          {staffByDay[currentDateIndex]?.map((staff) => (
-            <li key={staff.id}>{`${staff.firstName} ${staff.lastName}`}</li>
-          ))}
-        </ul>
-      )}
+        {!Array.isArray(staffByDay[currentDateIndex]) ||
+        staffByDay[currentDateIndex].length === 0 ? (
+          <p>No one birthday</p>
+        ) : (
+          <>
+            <p>birthday star:</p>
+            <ul>
+              {staffByDay[currentDateIndex]?.map((staff) => (
+                <li key={staff.id}>{`${staff.firstName} ${staff.lastName}`}</li>
+              ))}
+            </ul>
+          </>
+        )}
+      </div>
+
       <div className="mt-20">
-        {staffByDay.map((_, index) => (
-          <button
-            key={index}
-            type="button"
-            onClick={() => handleSelectDate(index)}
-            className="m-1 border"
-          >
-            {index}
-          </button>
-        ))}
+        {staffByDay.map((_, index) => {
+          const { month, day } = dayIndexToMonthDayMap[index];
+          return (
+            <button
+              key={index}
+              type="button"
+              onClick={() => handleSelectDate(index)}
+              className="m-1 border"
+            >
+              {month}/{day}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
