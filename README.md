@@ -72,6 +72,10 @@ If you change `.env`, restart the dev server (`npm run dev`) for changes to take
 Personal learning logs documenting key decisions, setup patterns, and dev research.
 
 - [01 – Frontend Setup & Fetching](./docs/learning-log/01-frontend-setup-and-fetching.md)
+- [02 – useEffect, async/await, and Error Handling](./docs/learning-log/02-useEffect-async-fetch-pattern.md)
+- [03 – Using React.Fragment & Import Rules](./docs/learning-log/03-React-Fragment.md)
+- [04 – UTC vs Local Dates in JavaScript ](./docs/learning-log/04-Date-UTC-vs-Local.md)
+- [05 – Birthday Tracker MVP Plan ](./docs/learning-log/05-birthday-tracker-mvp-plan.md)
 - Coming soon: Testing log, dark mode design log, backend integration notes
 
 ---
@@ -84,3 +88,7 @@ Personal learning logs documenting key decisions, setup patterns, and dev resear
 - [ ] Connect to backend API (Spring Boot)
 
 ---
+
+## After MVP
+
+- [ ]Add Zod later to validate backend data shape — helps catch unexpected API changes, ensures type safety, and avoids runtime bugs in production.
