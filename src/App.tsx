@@ -79,6 +79,38 @@ function App() {
     setCurrentDateIndex(dateIndex);
   };
 
+  const handleGoToToday = (): void => {
+    setCurrentDateIndex(todayIndex);
+  };
+
+  const handleGoToNextBday = (): void => {
+    if (staffByDay.length === 0) return;
+
+    if (!staffByDay.some((day) => day.length > 0)) return;
+
+    let nextIndex = (currentDateIndex + 1) % 366;
+
+    while (staffByDay[nextIndex].length === 0) {
+      nextIndex = (nextIndex + 1) % 366;
+    }
+
+    setCurrentDateIndex(nextIndex);
+  };
+
+  const handleGoToPrevBday = (): void => {
+    if (staffByDay.length === 0) return;
+
+    if (!staffByDay.some((day) => day.length > 0)) return;
+
+    let prevIndex = (currentDateIndex - 1 + 366) % 366;
+
+    while (staffByDay[prevIndex].length === 0) {
+      prevIndex = (prevIndex - 1 + 366) % 366;
+    }
+
+    setCurrentDateIndex(prevIndex);
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-8 text-center">
       <h1 className="text-3xl font-bold text-blue-600 underline">
@@ -104,6 +136,18 @@ function App() {
             </ul>
           </>
         )}
+      </div>
+
+      <div className="m-5 flex justify-center gap-3">
+        <button className="border" type="button" onClick={handleGoToPrevBday}>
+          previous
+        </button>
+        <button className="border" type="button" onClick={handleGoToToday}>
+          Today
+        </button>
+        <button className="border" type="button" onClick={handleGoToNextBday}>
+          Next
+        </button>
       </div>
 
       <div className="mt-20">
