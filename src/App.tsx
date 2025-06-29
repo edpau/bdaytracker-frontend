@@ -6,9 +6,38 @@ interface Staff {
   lastName: string;
 }
 
+const getDayIndexFromDate = (date: Date = new Date()): number => {
+  const utcMonth = date.getUTCMonth(); // 0-based
+  const utcDay = date.getUTCDate(); // 1-based
+
+  if (utcMonth < 0 || utcMonth > 11) {
+    throw new Error(`Invalid Month: ${utcMonth}`);
+  }
+
+  const daysInMonth = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+  if (utcDay < 1 || utcDay > daysInMonth[utcMonth]) {
+    throw new Error(`Invalid Day: ${utcDay} for Month: ${utcMonth + 1}`);
+  }
+
+  const cumulativeDays = [
+    0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335,
+  ];
+
+  const index = cumulativeDays[utcMonth] + utcDay - 1;
+
+  if (index < 0 || index >= 366) {
+    throw new Error('Unexpected error calculating day index');
+  }
+
+  return index;
+};
+
+const todayIndex = getDayIndexFromDate();
+
 function App() {
   const [staffByDay, setStaffByDay] = useState<Staff[][]>([]);
-  const [currentDateIndex, setCurrentDateIndex] = useState<number>(0);
+  const [currentDateIndex, setCurrentDateIndex] = useState<number>(todayIndex);
 
   // TODO: move fetch logic into api.ts and add loading/error states
   const fetchData = async () => {
