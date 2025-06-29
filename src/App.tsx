@@ -33,14 +33,25 @@ const getDayIndexFromDate = (date: Date = new Date()): number => {
   return index;
 };
 
-const todayIndex = getDayIndexFromDate();
+const dayIndexToMonthDayMap: { month: number; day: number }[] = (() => {
+  const result = [];
+  const daysInMonth = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  for (let month = 0; month < daysInMonth.length; month++) {
+    for (let day = 1; day <= daysInMonth[month]; day++) {
+      result.push({ month: month + 1, day });
+    }
+  }
+  return result;
+})();
+
+const todayIndex: number = getDayIndexFromDate();
 
 function App() {
   const [staffByDay, setStaffByDay] = useState<Staff[][]>([]);
   const [currentDateIndex, setCurrentDateIndex] = useState<number>(todayIndex);
 
   // TODO: move fetch logic into api.ts and add loading/error states
-  const fetchData = async () => {
+  const fetchData = async (): Promise<void> => {
     const useMock = import.meta.env.VITE_USE_MOCK === 'true';
     const baseURL = import.meta.env.VITE_API_BASE_URL;
     const url = useMock
@@ -50,14 +61,13 @@ function App() {
     try {
       const response = await fetch(url);
       const json: Staff[][] = await response.json();
-      console.log(json);
       if (!Array.isArray(json)) {
         throw new Error('API did not return an array');
       }
       setStaffByDay(json);
     } catch (error) {
       console.error('Fetch error:', error);
-      alert('landing error');
+      alert('Failed to load staff data. Please try again later.');
     }
   };
 
@@ -65,21 +75,8 @@ function App() {
     fetchData();
   }, []);
 
-  const dayIndexToMonthDayMap = (() => {
-    const result = [];
-    const daysInMonth = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    for (let month = 0; month < daysInMonth.length; month++) {
-      for (let day = 1; day <= daysInMonth[month]; day++) {
-        result.push({ month: month + 1, day });
-      }
-    }
-    console.log(result);
-    return result;
-  })();
-
-  const handleSelectDate = (dateIndex: number) => {
+  const handleSelectDate = (dateIndex: number): void => {
     setCurrentDateIndex(dateIndex);
-    console.log(dateIndex);
   };
 
   return (
