@@ -76,6 +76,8 @@ Personal learning logs documenting key decisions, setup patterns, and dev resear
 - [03 – Using React.Fragment & Import Rules](./docs/learning-log/03-React-Fragment.md)
 - [04 – UTC vs Local Dates in JavaScript ](./docs/learning-log/04-Date-UTC-vs-Local.md)
 - [05 – Birthday Tracker MVP Plan ](./docs/learning-log/05-birthday-tracker-mvp-plan.md)
+- [06 - Tailwind CSS v4 Notes – CSS-First Configuration, Breakpoints, Themes & Resources](./docs/learning-log/06-Tailwind_v4.md)
+- [07 - Tailwind CSS v4 – Multi-Theme Color System (No `tailwind.config.js` Required)](./docs/learning-log/07-Tailwind_multi-theme-color-system.md)
 - Coming soon: Testing log, dark mode design log, backend integration notes
 
 ---
