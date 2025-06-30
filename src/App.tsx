@@ -90,6 +90,17 @@ function App() {
     document.documentElement.classList.add(theme);
   }, [theme]);
 
+  useEffect(() => {
+    // Give iphone Dynamic Island dead zone background color
+    // Dynamically add a Tailwind class to <body>
+    document.body.classList.add('bg-background'); // or 'bg-background'
+
+    // Clean up when component unmounts
+    return () => {
+      document.body.classList.remove('bg-background');
+    };
+  }, []);
+
   const handleSelectDate = (dateIndex: number): void => {
     setCurrentDateIndex(dateIndex);
   };
