@@ -31,8 +31,13 @@ Tailwind is integrated using the plugin-based method:
 - Configured in `vite.config.ts`:
 
   ```ts
+  import { defineConfig } from 'vite';
+  import react from '@vitejs/plugin-react';
   import tailwindcss from '@tailwindcss/vite';
-  plugins: [react(), tailwindcss()];
+
+  export default defineConfig({
+    plugins: [react(), tailwindcss()],
+  });
   ```
 
 - CSS entry (`src/index.css`):
@@ -64,6 +69,12 @@ Tailwind is integrated using the plugin-based method:
     "plugins": ["prettier-plugin-tailwindcss"]
   }
   ```
+
+---
+
+## 🎨 Color Theme System with Tailwind v4
+
+- [07 - Tailwind CSS v4 – Multi-Theme Color System (No `tailwind.config.js` Required)](./learning-log/07-Tailwind_multi-theme-color-system.md)
 
 ---
 
@@ -105,6 +116,8 @@ npx lint-staged
 
 To handle conditional and conflicting Tailwind CSS classes smoothly, the project uses a custom utility combining clsx and tailwind-merge.
 
+- Source: [`src/utils/misc.ts`](src/utils/misc.ts)
+
 ### Installed:
 
 ```bash
@@ -127,5 +140,11 @@ export function cn(...inputs: ClassValue[]) {
 ```tsx
 import { cn } from './utils/misc';
 
-<button className={cn('base-class', isActive && 'active-class')} />;
+function MyButton({ isActive }: { isActive: boolean }) {
+  return (
+    <button className={cn('base-class', isActive && 'active-class')}>
+      Click me
+    </button>
+  );
+}
 ```
