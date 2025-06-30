@@ -82,6 +82,7 @@ Personal learning logs documenting key decisions, setup patterns, and dev resear
 - [06 - Tailwind CSS v4 Notes – CSS-First Configuration, Breakpoints, Themes & Resources](./docs/learning-log/06-Tailwind_v4.md)
 - [07 - Tailwind CSS v4 – Multi-Theme Color System (No `tailwind.config.js` Required)](./docs/learning-log/07-Tailwind_multi-theme-color-system.md)
 - [08 - `cn()` Utility (Combining `clsx` + `tailwind-merge`)](./docs/learning-log/08-cn-utility-note.md)
+- [09 - Tailwind Layout Setup: Container + Responsive Design](./docs/learning-log/09-Tailwind-container.md)
 - Coming soon: Testing log, backend integration notes
 
 ---
