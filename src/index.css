@@ -20,6 +20,10 @@
   --background: 242, 237, 208;
 }
 
+body {
+  font-family: Arial, sans-serif;
+}
+
 .light {
   --background: 242, 237, 208;
 }
