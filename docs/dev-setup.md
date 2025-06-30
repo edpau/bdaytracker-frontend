@@ -9,13 +9,14 @@ It’s a reference for current contributors and for setting up future tooling (e
 
 ## 📦 Included Tools
 
-| Tool         | Purpose                                      |
-| ------------ | -------------------------------------------- |
-| Tailwind CSS | Utility-first styling                        |
-| Prettier     | Code formatting with Tailwind sorting        |
-| ESLint       | Code linting for TypeScript/React            |
-| Husky        | Git hooks to prevent bad commits             |
-| lint-staged  | Run formatting/linting only on changed files |
+| Tool           | Purpose                                                 |
+| -------------- | ------------------------------------------------------- |
+| Tailwind CSS   | Utility-first styling                                   |
+| Prettier       | Code formatting with Tailwind sorting                   |
+| ESLint         | Code linting for TypeScript/React                       |
+| Husky          | Git hooks to prevent bad commits                        |
+| lint-staged    | Run formatting/linting only on changed files            |
+| `cn()` utility | Conditional and conflict-free Tailwind class management |
 
 ## 🎨 Tailwind Setup (Plugin Method)
 
@@ -96,4 +97,35 @@ npx lint-staged
   "*.{ts,tsx}": ["eslint --fix"],
   "*.{js,jsx,ts,tsx,json,css,md}": ["prettier --write"]
 }
+```
+
+---
+
+## ⚙️ Conditional Class Management: cn() Utility
+
+To handle conditional and conflicting Tailwind CSS classes smoothly, the project uses a custom utility combining clsx and tailwind-merge.
+
+### Installed:
+
+```bash
+npm install clsx tailwind-merge
+```
+
+### Utility function example (src/utils/misc.ts or src/lib/utils.ts):
+
+```tsx
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(...inputs));
+}
+```
+
+### Usage:
+
+```tsx
+import { cn } from './utils/misc';
+
+<button className={cn('base-class', isActive && 'active-class')} />;
 ```

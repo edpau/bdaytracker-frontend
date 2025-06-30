@@ -10,6 +10,8 @@ Built with Vite + React + Tailwind. Connects to a Spring Boot backend to display
 ![Prettier](https://img.shields.io/badge/Prettier-enabled-lightgrey)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-Enabled-38bdf8)
 ![Husky](https://img.shields.io/badge/Pre--commit-Husky-cc0000)
+![clsx](https://img.shields.io/badge/clsx-2.1.1-blue)
+![tailwind-merge](https://img.shields.io/badge/tailwind--merge-3.3.1-blue)
 
 This project uses:
 
@@ -18,6 +20,7 @@ This project uses:
 - [Prettier](https://prettier.io/) with `prettier-plugin-tailwindcss`
 - [ESLint](https://eslint.org/) for linting
 - [Husky](https://typicode.github.io/husky) + [lint-staged](https://github.com/okonet/lint-staged) for **pre-commit formatting and lint checks**
+- `cn()` utility (combining [`clsx`](https://github.com/lukeed/clsx) + [`tailwind-merge`](https://github.com/dcastil/tailwind-merge)) for **clean, conditional, and conflict-free Tailwind CSS class management**
 
 📄 **Full developer setup:**  
 👉 [`docs/dev-setup.md`](./docs/dev-setup.md)
@@ -78,7 +81,8 @@ Personal learning logs documenting key decisions, setup patterns, and dev resear
 - [05 – Birthday Tracker MVP Plan ](./docs/learning-log/05-birthday-tracker-mvp-plan.md)
 - [06 - Tailwind CSS v4 Notes – CSS-First Configuration, Breakpoints, Themes & Resources](./docs/learning-log/06-Tailwind_v4.md)
 - [07 - Tailwind CSS v4 – Multi-Theme Color System (No `tailwind.config.js` Required)](./docs/learning-log/07-Tailwind_multi-theme-color-system.md)
-- Coming soon: Testing log, dark mode design log, backend integration notes
+- [08 - `cn()` Utility (Combining `clsx` + `tailwind-merge`)](./docs/learning-log/08-cn-utility-note.md)
+- Coming soon: Testing log, backend integration notes
 
 ---
 
