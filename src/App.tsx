@@ -46,9 +46,15 @@ const dayIndexToMonthDayMap: { month: number; day: number }[] = (() => {
 
 const todayIndex: number = getDayIndexFromDate();
 
+// theme controller
+const themes = ['light', 'dark', 'red'] as const;
+type Theme = (typeof themes)[number];
+
 function App() {
   const [staffByDay, setStaffByDay] = useState<Staff[][]>([]);
   const [currentDateIndex, setCurrentDateIndex] = useState<number>(todayIndex);
+
+  const [theme, setTheme] = useState<Theme>('light');
 
   // TODO: move fetch logic into api.ts and add loading/error states
   const fetchData = async (): Promise<void> => {
@@ -74,6 +80,14 @@ function App() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  // theme controller
+  useEffect(() => {
+    // Remove all theme classes
+    themes.forEach((t) => document.documentElement.classList.remove(t));
+    // Add selected theme
+    document.documentElement.classList.add(theme);
+  }, [theme]);
 
   const handleSelectDate = (dateIndex: number): void => {
     setCurrentDateIndex(dateIndex);
@@ -112,7 +126,23 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8 text-center">
+    <div className="bg-background min-h-screen p-8 text-center">
+      {/* theme controller */}
+      <div className="flex flex-col items-center justify-center gap-4 text-white">
+        <h1 className="text-3xl font-bold">Current Theme: {theme}</h1>
+        <div className="flex gap-4">
+          {themes.map((t) => (
+            <button
+              key={t}
+              onClick={() => setTheme(t)}
+              className="rounded bg-white px-4 py-2 text-black shadow transition-transform hover:scale-105"
+            >
+              {t}
+            </button>
+          ))}
+        </div>
+      </div>
+
       <h1 className="text-3xl font-bold text-blue-600 underline">
         Staff Birthday
       </h1>
