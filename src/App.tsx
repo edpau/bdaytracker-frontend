@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { cn } from './utils/misc';
 
 interface Staff {
   id: number;
@@ -188,7 +189,10 @@ function App() {
               key={index}
               type="button"
               onClick={() => handleSelectDate(index)}
-              className="m-1 border"
+              className={cn(
+                'm-1 border',
+                index === currentDateIndex && 'bg-blue-200',
+              )}
             >
               {month}/{day}
             </button>
