@@ -127,77 +127,81 @@ function App() {
   };
 
   return (
-    <div className="bg-background min-h-screen p-8 text-center">
-      {/* theme controller */}
-      <div className="flex flex-col items-center justify-center gap-4 text-white">
-        <h1 className="text-3xl font-bold">Current Theme: {theme}</h1>
-        <div className="flex gap-4">
-          {themes.map((t) => (
-            <button
-              key={t}
-              onClick={() => setTheme(t)}
-              className="rounded bg-white px-4 py-2 text-black shadow transition-transform hover:scale-105"
-            >
-              {t}
-            </button>
-          ))}
+    <div className="bg-background min-h-screen text-center">
+      <div className="container mx-auto border">
+        {/* theme controller */}
+        <div className="flex flex-col items-center justify-center gap-4 text-white">
+          <h1 className="text-3xl font-bold">Current Theme: {theme}</h1>
+          <div className="flex gap-4">
+            {themes.map((t) => (
+              <button
+                key={t}
+                onClick={() => setTheme(t)}
+                className="rounded bg-white px-4 py-2 text-black shadow transition-transform hover:scale-105"
+              >
+                {t}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <h1 className="text-3xl font-bold text-blue-600 underline">
-        Staff Birthday
-      </h1>
+        <h1 className="text-3xl font-bold text-blue-600 underline">
+          Staff Birthday
+        </h1>
 
-      <div className="border">
-        <h2>
-          {dayIndexToMonthDayMap[currentDateIndex].month}/
-          {dayIndexToMonthDayMap[currentDateIndex].day}
-        </h2>
+        <div className="border">
+          <h2>
+            {dayIndexToMonthDayMap[currentDateIndex].month}/
+            {dayIndexToMonthDayMap[currentDateIndex].day}
+          </h2>
 
-        {!Array.isArray(staffByDay[currentDateIndex]) ||
-        staffByDay[currentDateIndex].length === 0 ? (
-          <p>No one birthday</p>
-        ) : (
-          <>
-            <p>birthday star:</p>
-            <ul>
-              {staffByDay[currentDateIndex]?.map((staff) => (
-                <li key={staff.id}>{`${staff.firstName} ${staff.lastName}`}</li>
-              ))}
-            </ul>
-          </>
-        )}
-      </div>
+          {!Array.isArray(staffByDay[currentDateIndex]) ||
+          staffByDay[currentDateIndex].length === 0 ? (
+            <p>No one birthday</p>
+          ) : (
+            <>
+              <p>birthday star:</p>
+              <ul>
+                {staffByDay[currentDateIndex]?.map((staff) => (
+                  <li
+                    key={staff.id}
+                  >{`${staff.firstName} ${staff.lastName}`}</li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
 
-      <div className="m-5 flex justify-center gap-3">
-        <button className="border" type="button" onClick={handleGoToPrevBday}>
-          previous
-        </button>
-        <button className="border" type="button" onClick={handleGoToToday}>
-          Today
-        </button>
-        <button className="border" type="button" onClick={handleGoToNextBday}>
-          Next
-        </button>
-      </div>
+        <div className="m-5 flex justify-center gap-3">
+          <button className="border" type="button" onClick={handleGoToPrevBday}>
+            previous
+          </button>
+          <button className="border" type="button" onClick={handleGoToToday}>
+            Today
+          </button>
+          <button className="border" type="button" onClick={handleGoToNextBday}>
+            Next
+          </button>
+        </div>
 
-      <div className="mt-20">
-        {staffByDay.map((_, index) => {
-          const { month, day } = dayIndexToMonthDayMap[index];
-          return (
-            <button
-              key={index}
-              type="button"
-              onClick={() => handleSelectDate(index)}
-              className={cn(
-                'm-1 border',
-                index === currentDateIndex && 'bg-blue-200',
-              )}
-            >
-              {month}/{day}
-            </button>
-          );
-        })}
+        <div className="mt-20">
+          {staffByDay.map((_, index) => {
+            const { month, day } = dayIndexToMonthDayMap[index];
+            return (
+              <button
+                key={index}
+                type="button"
+                onClick={() => handleSelectDate(index)}
+                className={cn(
+                  'm-1 border',
+                  index === currentDateIndex && 'bg-blue-200',
+                )}
+              >
+                {month}/{day}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
