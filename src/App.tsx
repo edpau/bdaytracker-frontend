@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react';
 import { cn } from './utils/misc';
-
-interface Staff {
-  id: number;
-  firstName: string;
-  lastName: string;
-}
+import BirthdayDisplay from './components/BirthdayDisplay';
+import type { Staff } from './types';
 
 const getDayIndexFromDate = (date: Date = new Date()): number => {
   const utcMonth = date.getUTCMonth(); // 0-based
@@ -160,28 +156,11 @@ function App() {
           Staff Birthday
         </h1>
 
-        <div className="border">
-          <h2>
-            {dayIndexToMonthDayMap[currentDateIndex].month}/
-            {dayIndexToMonthDayMap[currentDateIndex].day}
-          </h2>
-
-          {!Array.isArray(staffByDay[currentDateIndex]) ||
-          staffByDay[currentDateIndex].length === 0 ? (
-            <p>No one birthday</p>
-          ) : (
-            <>
-              <p>birthday star:</p>
-              <ul>
-                {staffByDay[currentDateIndex]?.map((staff) => (
-                  <li
-                    key={staff.id}
-                  >{`${staff.firstName} ${staff.lastName}`}</li>
-                ))}
-              </ul>
-            </>
-          )}
-        </div>
+        <BirthdayDisplay
+          staffForDay={staffByDay[currentDateIndex] ?? []}
+          month={dayIndexToMonthDayMap[currentDateIndex].month}
+          day={dayIndexToMonthDayMap[currentDateIndex].day}
+        />
 
         <div className="m-5 flex justify-center gap-3">
           <button className="border" type="button" onClick={handleGoToPrevBday}>
