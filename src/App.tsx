@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { cn } from './utils/misc';
 import BirthdayDisplay from './components/BirthdayDisplay';
 import type { Staff } from './types';
+import BirthdayCalendar from './components/BirthdayCalendar';
 
 const getDayIndexFromDate = (date: Date = new Date()): number => {
   const utcMonth = date.getUTCMonth(); // 0-based
@@ -174,24 +174,12 @@ function App() {
           </button>
         </div>
 
-        <div className="mt-20">
-          {staffByDay.map((_, index) => {
-            const { month, day } = dayIndexToMonthDayMap[index];
-            return (
-              <button
-                key={index}
-                type="button"
-                onClick={() => handleSelectDate(index)}
-                className={cn(
-                  'm-1 border',
-                  index === currentDateIndex && 'bg-blue-200',
-                )}
-              >
-                {month}/{day}
-              </button>
-            );
-          })}
-        </div>
+        <BirthdayCalendar
+          staffByDay={staffByDay}
+          currentDateIndex={currentDateIndex}
+          dayIndexToMonthDayMap={dayIndexToMonthDayMap}
+          onSelect={handleSelectDate}
+        />
       </div>
     </div>
   );
